@@ -8,44 +8,54 @@ def reset_lim():
     axes.set_ylim([0, 1000])
 
 
-def model(eng, step_num=500, draw_each=25):
+def model(eng, step_num=500, draw_each=50):
     plt.ion()
-    for i in range(step_num):
-        eng.forward_pass()
-        eng.backward_pass()
+    for _ in range(int(step_num/draw_each)):
+        eng.simulate_n_steps(draw_each)
         data = eng.getT()
 
         reset_lim()
         plt.plot(data)
 
-        if i % draw_each == 0:
-            plt.draw()
-            plt.pause(0.1)
-            plt.clf()
+        plt.draw()
+        plt.pause(0.1)
+        plt.clf()
 
     plt.ioff()
 
 
+def plot_eng(eng):
+    plt.plot(eng.getT())
+    reset_lim()
+    plt.show()
+
+
 if __name__ == "__main__":
-    eng = earthcooling.Engine(0.01, 0.01)
-    eng.init_physics(573, 10, 1.0, 1.0, 1.0)
+    eng = earthcooling.Engine(1, 0.01)
+    args = {
+        "mantle_temperature": 573,
+        "thermal_conductivity": 3.75,
+        "specific_heat_capacity": 1077.0,
+        "density": 2700.0,
+        "upper_mantle": -40 * pow(10, 3),
+        "troposphere_height": 0  # 15*pow(10, 3)
+    }
+    eng.init_physics(**args)
 
-    eng.fill_with(0.0)
+    eng.fill_with(300.0)
 
-    plt.plot(eng.getT())
-    reset_lim()
-    plt.show()
+    eng.forward_pass()
+    eng.backward_pass()
 
-    model(eng, step_num=1000)
+    plot_eng(eng)
 
-    plt.plot(eng.getT())
-    reset_lim()
-    plt.show()
+    model(eng, step_num=6000, draw_each=100)
+
+    print("balance?")
+    plot_eng(eng)
 
     eng.enable_radiation()
 
-    model(eng, step_num=1000)
+    model(eng, step_num=1000, draw_each=50)
 
-    plt.plot(eng.getT())
-    reset_lim()
-    plt.show()
+    plot_eng(eng)
