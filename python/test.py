@@ -1,5 +1,6 @@
 import earthcooling
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 import numpy as np
 
 
@@ -10,7 +11,7 @@ def reset_lim():
 
 def model(eng, step_num=500, draw_each=50):
     plt.ion()
-    for _ in range(int(step_num/draw_each)):
+    for _ in tqdm(range(int(step_num/draw_each))):
         eng.simulate_n_steps(draw_each)
         data = eng.getT()
 
@@ -31,7 +32,7 @@ def plot_eng(eng):
 
 
 if __name__ == "__main__":
-    eng = earthcooling.Engine(1, 0.01)
+    eng = earthcooling.Engine(0.1, 0.01)
     args = {
         "mantle_temperature": 573,
         "thermal_conductivity": 3.75,
@@ -49,13 +50,13 @@ if __name__ == "__main__":
 
     plot_eng(eng)
 
-    model(eng, step_num=6000, draw_each=100)
+    model(eng, step_num=60000, draw_each=1000)
 
     print("balance?")
     plot_eng(eng)
 
     eng.enable_radiation()
 
-    model(eng, step_num=1000, draw_each=50)
+    model(eng, step_num=10000, draw_each=500)
 
     plot_eng(eng)
