@@ -6,6 +6,8 @@
 #define EARTHCOOLING_ENGINE_H
 
 #include <array>
+#include <cmath>
+#include <vector>
 
 struct engine {
     double kappa = 1.0;
@@ -39,7 +41,7 @@ struct engine {
 
     void backward_pass();
 
-    void enable_radiation();
+    void enable_radiation(double alpha = 1);
 
     [[nodiscard]] std::vector<double> getT() const;
 };

@@ -6,6 +6,7 @@
 #include <pybind11/stl.h>
 
 #include "engine.h"
+#include "find_alpha.h"
 
 namespace py = pybind11;
 
@@ -18,5 +19,5 @@ PYBIND11_MODULE(earthcooling, m) {
             .def("getT", &engine::getT)
             .def("enable_radiation", &engine::enable_radiation)
             .def("fill_with", &engine::fill_with);
-
+    m.def("find_alpha", &find_alpha);
 }
