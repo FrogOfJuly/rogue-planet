@@ -7,5 +7,6 @@ add_subdirectory(deps/pybind11)
 
 pybind11_add_module(earthcooling
         wrapper.cpp
+        find_alpha.cpp
         engine.cpp
         engine.h)

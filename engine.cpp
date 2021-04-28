@@ -53,8 +53,8 @@ void engine::fill_with(double t) {
     }
 }
 
-void engine::enable_radiation() {
-    sigma = sigma_sf;
+void engine::enable_radiation(double alpha) {
+    sigma = alpha * sigma_sf;
 }
 
 engine::engine(double dx, double dt) : dx(dx), dt(dt) {}
