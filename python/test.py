@@ -55,7 +55,7 @@ if __name__ == "__main__":
     print("balance?")
     plot_eng(eng)
 
-    eng.enable_radiation()
+    eng.enable_radiation(0.5)
 
     model(eng, step_num=10000, draw_each=500)
 
