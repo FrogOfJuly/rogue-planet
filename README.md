@@ -2,6 +2,7 @@
 
 Repository for devdays of spring 2021.
 ```bash
+> git clone https://github.com/FrogOfJuly/rogue-planet.git
 > cd earthcooling
 > mkdir deps && cd deps
 > git clone https://github.com/pybind/pybind11.git
