@@ -10,3 +10,9 @@ pybind11_add_module(earthcooling
         find_alpha.cpp
         engine.cpp
         engine.h)
+
+#add_executable(earthcooling_test
+#        test.cpp
+#        find_alpha.cpp
+#        engine.cpp
+#        engine.h)
