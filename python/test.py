@@ -56,7 +56,8 @@ def model(eng, step_num=500, draw_each=50):
 def plot_eng(eng):
     plt.plot(eng.getX(), eng.getT())
     reset_lim()
-    plt.show()
+    # plt.show()
+    plt.savefig("Termperature_in_depth.png")
 
 
 if __name__ == "__main__":
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     # eng.set_border_cond([Tl + (Tsuf - Tl) * float(i) / float(N) for i in range(N)])
     eng.fill_with(Tsurf)
     ticks_per_day = eng.ticks_per_day()
-    eng.enable_radiation(0.001)
+    # eng.enable_radiation(0.001)
     # surface_tmp, time = model(eng, step_num=100000, draw_each=ticks_per_day * 10)
     surface_tmp, time, flux = [], [], []
     # plot_eng(eng)
@@ -105,12 +106,13 @@ if __name__ == "__main__":
     local_surface_tmp, local_time, local_flux = model(eng, step_num=200, draw_each=ticks_per_day)
 
     surface_tmp, time, flux = surface_tmp + local_surface_tmp, time + local_time, flux + local_flux
-    plot_eng(eng)
 
     global_suface_tmp, global_time, global_flux = model(eng, step_num=50000, draw_each=ticks_per_day * 10)
     surface_tmp, time, flux = surface_tmp + global_suface_tmp, time + global_time, flux + global_flux
     plot_eng(eng)
+
     time = [t / (3600.0 * 24.0) for t in time]
+
     plt.plot(time, surface_tmp)
     plt.ylabel("T, K")
     plt.xlabel("t, days")
@@ -125,8 +127,11 @@ if __name__ == "__main__":
     ax.hlines(90, 0, length, linestyles='dashed', colors='blue', label='90 $K^\circ$ $O_2$')
     ax.hlines(77, 0, length, linestyles='dashed', colors='blue', label='77 $K^\circ$ $N$')
     plt.legend()
-    plt.show()
+    # plt.show()
+    plt.savefig("surface_temperature_over_time.png")
+
     plt.plot(time, flux)
     plt.ylabel("Enegry flux, $J \cdot m^{-2}$")
     plt.xlabel("t, days")
-    plt.show()
+    # plt.show()
+    plt.savefig("Energy_flux_over_time.png")
