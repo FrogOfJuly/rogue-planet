@@ -98,6 +98,8 @@ struct engine {
 
     [[nodiscard]] int ticks_per_day() const;
 
+    [[nodiscard]] double get_radiation_flux() const;
+
 
 };
 

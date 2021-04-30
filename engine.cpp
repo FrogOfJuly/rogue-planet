@@ -45,7 +45,7 @@ void engine::init_physics(double mantle_temerature,
 
     eval_params.N = (int) (eval_params.l / eval_params.dx);
 
-    eval_params.J0 = phys_params.T0 * phys_params.T0 * phys_params.T0 * phys_params.sigma /
+    eval_params.J0 = phys_params.sigma /
                      phys_params.core.kappa;
     eval_params.r = eval_params.dt / (eval_params.dx * eval_params.dx);
 
@@ -56,23 +56,23 @@ void engine::init_physics(double mantle_temerature,
 }
 
 void engine::fill_with(double t) {
-    T[0] = 1;
+    T[0] = t;
     for (int i = 1; i < eval_params.N + 1; ++i) {
-        T[i] = t / phys_params.T0;
+        T[i] = t;
     }
 }
 
 void engine::enable_radiation(double alpha_) {
     phys_params.sigma = consts.sigma_sb;
-    eval_params.J0 = alpha_ * phys_params.T0 * phys_params.T0 * phys_params.T0 * phys_params.sigma /
+    eval_params.J0 = alpha_ * phys_params.sigma /
                      phys_params.core.kappa;
 }
 
 void engine::forward_pass() {
     {
-        double F_0 = phys_params.Tl / phys_params.T0;
+        double F_0 = 0.0;
         double B_0 = 1.0;
-        double C_0 = 0.0;
+        double C_0 = -1.0;
         alpha[0] = -C_0 / B_0;
         beta[0] = F_0 / B_0;
     }
@@ -117,7 +117,7 @@ void engine::backward_pass() {
 engine::grid engine::getT() const {
     std::vector<double> res(T.size());
     for (int i = 0; i < eval_params.N + 1; ++i) {
-        res[i] = T[i] * phys_params.T0;
+        res[i] = T[i];
     }
     return res;
 }
@@ -150,9 +150,14 @@ int engine::ticks_per_day() const {
 
 void engine::set_border_cond(const engine::grid &data) {
     assert(T.size() - 1 == data.size());
-    T[0] = 1.0;
+
     for (size_t i = 0; i < T.size(); ++i) {
-        T[i + 1] = data[i] / phys_params.T0;
+        T[i + 1] = data[i];
     }
+    T[0] = T[1];
+}
+
+double engine::get_radiation_flux() const {
+    return phys_params.sigma / phys_params.core.kappa * T.back() * T.back() * T.back() * T.back();
 }
 
