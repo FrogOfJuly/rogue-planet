@@ -130,8 +130,8 @@ if __name__ == "__main__":
     # plt.show()
     plt.savefig("surface_temperature_over_time.png")
 
-    plt.plot(time, flux)
-    plt.ylabel("Enegry flux, $J \cdot m^{-2}$")
-    plt.xlabel("t, days")
-    # plt.show()
-    plt.savefig("Energy_flux_over_time.png")
+    # plt.plot(time, flux)
+    # plt.ylabel("Enegry flux, $J \cdot m^{-2}$")
+    # plt.xlabel("t, days")
+    # # plt.show()
+    # plt.savefig("Energy_flux_over_time.png")
