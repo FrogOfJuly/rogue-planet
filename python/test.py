@@ -6,7 +6,7 @@ import numpy as np
 
 def reset_lim():
     axes = plt.gca()
-    axes.set_ylim([0, 1000])
+    axes.set_ylim([0, 500])
     plt.xlabel("R, km")
     plt.ylabel("T, K")
 
