@@ -1,6 +1,8 @@
 # rogue-planet
 
-Repository for devdays of spring 2021.
+### Repository for devdays of spring 2021.
+
+How to run the simulation with our parameters
 ```bash
 > git clone https://github.com/FrogOfJuly/rogue-planet.git
 > cd earthcooling
@@ -13,3 +15,4 @@ Repository for devdays of spring 2021.
 > pip install matplotlib
 > python test.py
 ```
+If you want to see some more details go [here](https://www.notion.so/Road-map-82734124a3694ed18324830bc8902489).
