@@ -2,4 +2,4 @@
 
 Unreal Engine 4.25
 
-Download build (Linux, Windows): https://dilika.itch.io/rogue-earth-visualizer
+Download executables (Linux, Windows): https://dilika.itch.io/rogue-earth-visualizer
