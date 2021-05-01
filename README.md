@@ -17,8 +17,7 @@ How to run the simulation with our parameters
 > python test.py
 ```
 
-Please check UE4 visualization [here].
-(https://dilika.itch.io/rogue-earth-visualizer)
+Please check UE4 visualization [here](https://dilika.itch.io/rogue-earth-visualizer).
 
 As an output, there will be some plots. For more details about plot information see our [presentation](https://docs.google.com/presentation/d/1574bsPs3SFwSELA6CzuO_OwHwaCYPg4pNq-grVEDIqo/edit?usp=sharing).
 
